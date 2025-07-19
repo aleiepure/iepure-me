@@ -7,15 +7,14 @@ import NotFound from './components/NotFound.vue'
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
 
-const routes: Record<string, typeof Home | typeof NotFound> = {
+const routes: Record<string, any> = {
   '/': Home,
-  "/projects": Projects
+  "/projects": Projects,
 }
 
 const getCurrentPath = () => {
-  const hash = window.location.pathname;
-  console.log('Current path:', hash);
-  return hash || '/';
+  const path = window.location.pathname;
+  return path || '/';
 }
 
 const currentPath = ref<string>(getCurrentPath())
@@ -28,7 +27,7 @@ const currentView = computed(() => {
   return routes[currentPath.value] || NotFound
 })
 
-const isFooterFixed = computed(() => {
+const isHomePage = computed(() => {
   return currentPath.value === '/';
 });
 </script>
@@ -39,6 +38,6 @@ const isFooterFixed = computed(() => {
     <main :class="isHomePage ? '' : 'flex-1'">
       <component :is="currentView" />
     </main>
-    <Footer :class="isFooterFixed ? 'fixed bottom-0 left-0 right-0' : ''" />
+    <Footer :class="isHomePage ? 'fixed bottom-0 left-0 right-0' : ''" />
   </div>
 </template>
