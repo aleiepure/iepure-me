@@ -7,10 +7,6 @@ const props = defineProps({
         required: true
     }
 });
-
-const projectIcon = computed(() => {
-    return new URL(props.project.icon, import.meta.url).href;
-});
 </script>
 
 <template>
@@ -20,7 +16,7 @@ const projectIcon = computed(() => {
 
             <!-- Project Icon -->
             <div class="flex-shrink-0 mb-4 lg:mb-0 lg:mr-6">
-                <img :src="projectIcon" :alt="project.title"
+                <img :src="project.icon" :alt="project.title"
                     class="w-16 h-16 lg:w-24 lg:h-24 object-contain rounded-lg">
             </div>
 
