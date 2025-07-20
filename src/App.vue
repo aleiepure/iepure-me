@@ -12,29 +12,25 @@ const routes: Record<string, Component> = {
   "/projects": Projects,
 }
 
-const getCurrentPath = () => {
-  const path = window.location.pathname;
-  return path || '/';
-}
-
-const currentPath = ref<string>(getCurrentPath())
+const currentPath = ref<string>(window.location.hash)
 
 window.addEventListener('hashchange', () => {
-  currentPath.value = getCurrentPath();
+  currentPath.value = window.location.hash
 })
 
 const currentView = computed(() => {
-  return routes[currentPath.value] || NotFound
+  return routes[currentPath.value.slice(1) || '/'] || NotFound
 })
 
 const isHomePage = computed(() => {
-  return currentPath.value === '/';
+  console.log('Current path:', currentPath.value);
+  return currentPath.value === '#/';
 });
 </script>
 
 <template>
   <div class="min-h-screen" :class="isHomePage ? 'relative' : 'flex flex-col'">
-    <NavBar :selectedPath="currentPath" />
+    <NavBar />
     <main :class="isHomePage ? '' : 'flex-1'">
       <component :is="currentView" />
     </main>

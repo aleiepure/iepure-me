@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const props = defineProps<{ selectedPath: string }>()
-
 const isMobileMenuOpen = ref(false)
 const isScrolled = ref(false)
 
@@ -23,8 +21,8 @@ onUnmounted(() => {
 })
 
 const navigation = [
-    { name: 'Home', icon: 'fa-solid fa-house', href: '/', selected: props.selectedPath === '/' },
-    { name: 'Projects', icon: 'fa-solid fa-screwdriver-wrench', href: '/projects', selected: props.selectedPath === '/projects' },
+    { name: 'Home', icon: 'fa-solid fa-house', href: '#/'},
+    { name: 'Projects', icon: 'fa-solid fa-screwdriver-wrench', href: '#/projects'},
 ]
 </script>
 
@@ -71,8 +69,7 @@ const navigation = [
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4 relative">
                             <a v-for="item in navigation" :key="item.name" :href="item.href"
-                                :class="item.selected ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'"
-                                class="rounded-md px-3 py-2 text-sm font-medium">
+                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                                 <i :class="item.icon" class="mr-2"></i> {{ item.name }}
                             </a>
                         </div>
@@ -85,8 +82,7 @@ const navigation = [
         <div v-show="isMobileMenuOpen" id="mobile-menu" class="sm:hidden">
             <div class="space-y-1 px-2 pt-2 pb-3">
                 <a v-for="item in navigation" :key="item.name" :href="item.href"
-                    :class="item.selected ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'"
-                    class="block rounded-md px-3 py-2 text-base font-medium">
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <i :class="item.icon" class="mr-2"></i> {{ item.name }}
                 </a>
             </div>
